@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+  - name: "Install required software"
+    apt:
+      name: "{{ packages }}"
+      state: present
+    become: true
+    vars:
+      packages:
+      - docker-compose
