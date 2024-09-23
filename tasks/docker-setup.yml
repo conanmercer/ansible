@@ -1,6 +1,4 @@
-- hosts: localhost
-  tasks:
-  - name: "Install required software"
+  - name: Install Docker
     apt:
       name: "{{ packages }}"
       state: present
