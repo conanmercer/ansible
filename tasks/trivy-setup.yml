@@ -1,10 +1,8 @@
-  - name: Install Docker
+  - name: Install Trviy Security Scanner
     apt:
       name: "{{ packages }}"
       state: present
     become: true
     vars:
       packages:
-      - docker-ce
-      - docker-ce-cli
-      - docker-compose
+      - trivy
