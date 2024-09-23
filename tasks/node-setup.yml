@@ -1,0 +1,54 @@
+- name: Add NodeSource repository
+  become: true
+  shell: curl -sL https://deb.nodesource.com/setup_20.x | bash -
+  tags:
+    - install
+    - node
+
+- name: Install Node.js
+  become: true
+  apt:
+    name: nodejs
+    state: present
+  tags:
+    - install
+    - node
+
+- name: npmjs prefix
+  shell: mkdir -p ~/.local/.npm-global
+  tags:
+    - install
+    - node
+
+- name: Add npmjs to PATH
+  shell: PATH=~/.local/.npm-global/bin:$PATH
+  tags:
+    - install
+    - node
+
+- name: npmjs global settings
+  shell: npm config set prefix '~/.local/.npm-global'
+  tags:
+    - install
+    - node
+
+- name: Export npmjs PATH in case dotfiles are not installed
+  shell: export PATH=~/.local/.npm-global/bin:$PATH
+  tags:
+    - install
+    - node
+    - npm-path
+
+- name: Install N
+  npm:
+    name: n
+    global: yes
+  tags:
+    - install
+    - node
+
+- name: Install correct version of Node
+  shell: n 20
+  tags:
+    - install
+    - node

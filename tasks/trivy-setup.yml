@@ -1,4 +1,4 @@
-  - name: Install Trviy Security Scanner
+  - name: Install Trivy Security Scanner
     apt:
       name: "{{ packages }}"
       state: present
