@@ -17,7 +17,7 @@
     - node
 
 - name: Npmjs prefix
-  ansible.builtin.shell: mkdir -p ~/.local/.npm-global
+  ansible.builtin.command: mkdir -p ~/.local/.npm-global
   tags:
     - install
     - node
