@@ -1,6 +1,6 @@
 - name: Add NodeSource repository
   become: true
-  shell: curl -sL https://deb.nodesource.com/setup_20.x | bash -
+  ansible.builtin.shell: curl -sL https://deb.nodesource.com/setup_20.x | bash -
   tags:
     - install
     - node
@@ -15,25 +15,25 @@
     - node
 
 - name: Npmjs prefix
-  shell: mkdir -p ~/.local/.npm-global
+  ansible.builtin.shell: mkdir -p ~/.local/.npm-global
   tags:
     - install
     - node
 
 - name: Add npmjs to PATH
-  shell: PATH=~/.local/.npm-global/bin:$PATH
+  ansible.builtin.shell: PATH=~/.local/.npm-global/bin:$PATH
   tags:
     - install
     - node
 
 - name: Npmjs global settings
-  shell: npm config set prefix '~/.local/.npm-global'
+  ansible.builtin.shell: npm config set prefix '~/.local/.npm-global'
   tags:
     - install
     - node
 
 - name: Export npmjs PATH in case dotfiles are not installed
-  shell: export PATH=~/.local/.npm-global/bin:$PATH
+  ansible.builtin.shell: export PATH=~/.local/.npm-global/bin:$PATH
   tags:
     - install
     - node
@@ -42,13 +42,13 @@
 - name: Install N
   npm:
     name: n
-    global: yes
+    global: true
   tags:
     - install
     - node
 
 - name: Install correct version of Node
-  shell: n 20
+  ansible.builtin.shell: n 20
   tags:
     - install
     - node

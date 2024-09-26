@@ -1,8 +1,8 @@
-  - name: Install Latex
-    apt:
-      name: "{{ packages }}"
-      state: present
-    become: true
-    vars:
-      packages:
+- name: Install Latex
+  ansible.builtin.apt:
+    name: "{{ packages }}"
+    state: present
+  become: true
+  vars:
+    packages:
       - texlive

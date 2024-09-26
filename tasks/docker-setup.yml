@@ -1,5 +1,5 @@
 - name: Install Docker
-  apt:
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
   become: true
@@ -10,7 +10,7 @@
       - docker-compose
 
 - name: Start Docker service
-  service:
+  ansible.builtin.service:
     name: docker
     state: started
     enabled: true

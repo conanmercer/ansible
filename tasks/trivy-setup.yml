@@ -1,8 +1,8 @@
-  - name: Install Trivy Security Scanner
-    apt:
-      name: "{{ packages }}"
-      state: present
-    become: true
-    vars:
-      packages:
+- name: Install Trivy Security Scanner
+  apt:
+    name: "{{ packages }}"
+    state: present
+  become: true
+  vars:
+    packages:
       - trivy
