@@ -14,7 +14,7 @@
     - install
     - node
 
-- name: npmjs prefix
+- name: Npmjs prefix
   shell: mkdir -p ~/.local/.npm-global
   tags:
     - install
@@ -26,7 +26,7 @@
     - install
     - node
 
-- name: npmjs global settings
+- name: Npmjs global settings
   shell: npm config set prefix '~/.local/.npm-global'
   tags:
     - install

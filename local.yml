@@ -12,3 +12,4 @@
     - include: tasks/docker-setup.yml
     - include: tasks/trivy-setup.yml
     - include: tasks/node-setup.yml
+    - include: tasks/latex-setup.yml

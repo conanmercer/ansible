@@ -1,0 +1,8 @@
+  - name: Install Latex
+    apt:
+      name: "{{ packages }}"
+      state: present
+    become: true
+    vars:
+      packages:
+      - texlive
