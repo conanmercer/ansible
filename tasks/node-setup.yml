@@ -7,6 +7,14 @@
     - install
     - node
 
+- name: Run NodeSource setup script
+  become: true
+  ansible.builtin.command:
+    cmd: bash /tmp/nodesource_setup.sh
+  tags:
+    - install
+    - node
+
 - name: Install Node.js
   become: true
   ansible.builtin.apt:
@@ -17,40 +25,56 @@
     - node
 
 - name: Npmjs prefix
-  ansible.builtin.command: mkdir -p ~/.local/.npm-global
+  become: true
+  ansible.builtin.command:
+    cmd: mkdir -p ~/.local/.npm-global
   tags:
     - install
     - node
 
-- name: Add npmjs to PATH
-  ansible.builtin.shell: PATH=~/.local/.npm-global/bin:$PATH
+- name: Ensure npm is installed
+  become: true
+  ansible.builtin.command:
+    cmd: npm --version
+  register: npm_check
+  ignore_errors: yes
   tags:
     - install
     - node
 
 - name: Npmjs global settings
-  ansible.builtin.shell: npm config set prefix '~/.local/.npm-global'
+  become: true
+  ansible.builtin.command:
+    cmd: npm config set prefix '~/.local/.npm-global'
+  when: npm_check.rc == 0
   tags:
     - install
     - node
 
-- name: Export npmjs PATH in case dotfiles are not installed
-  ansible.builtin.shell: export PATH=~/.local/.npm-global/bin:$PATH
+- name: Add npmjs to PATH
+  become: true
+  ansible.builtin.lineinfile:
+    path: ~/.bashrc
+    line: "export PATH=~/.local/.npm-global/bin:$PATH"
+    state: present
   tags:
     - install
     - node
-    - npm-path
 
 - name: Install N
+  become: true
   npm:
     name: n
     global: true
+  register: install_n
   tags:
     - install
     - node
 
 - name: Install correct version of Node
-  ansible.builtin.shell: n 20
+  become: true
+  ansible.builtin.shell: ~/.local/bin/n 20
+  when: install_n.changed
   tags:
     - install
     - node
