@@ -1,0 +1,30 @@
+- name: Install unzip package
+  apt:
+    name: unzip
+    state: present
+  become: yes
+
+- name: Check if AWS CLI is already installed
+  command: aws --version
+  register: aws_cli_version
+  ignore_errors: true
+
+- name: Download AWS CLI v2
+  shell: |
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  when: aws_cli_version.rc != 0
+
+- name: Unzip AWS CLI installer
+  shell: |
+    unzip awscliv2.zip
+  when: aws_cli_version.rc != 0
+- name: Install AWS CLI
+  shell: |
+    sudo ./aws/install
+  when: aws_cli_version.rc != 0
+
+- name: Remove AWS CLI installer zip file
+  file:
+    path: awscliv2.zip
+    state: absent
+

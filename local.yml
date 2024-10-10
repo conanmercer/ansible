@@ -9,7 +9,9 @@
         - install
         - core
   tasks:
-    - include: tasks/docker-setup.yml
-    - include: tasks/trivy-setup.yml
-    - include: tasks/node-setup.yml
-    - include: tasks/latex-setup.yml
+    - include_tasks: tasks/docker-setup.yml
+    # - include_tasks: tasks/trivy-setup.yml
+    - include_tasks: tasks/node-setup.yml
+    - include_tasks: tasks/latex-setup.yml
+    - include_tasks: tasks/conda-setup.yml
+    - include_tasks: tasks/aws-cli-setup.yml

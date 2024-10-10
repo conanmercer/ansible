@@ -1,8 +1,17 @@
+- name: Add the Trivy GPG key
+  ansible.builtin.apt_key:
+    url: https://aquasecurity.github.io/trivy-repo/deb/public.key
+    state: present
+    validate_certs: yes
+
+- name: Add the Trivy repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main"
+    filename: trivy
+    state: present
+
 - name: Install Trivy Security Scanner
   ansible.builtin.apt:
-    name: "{{ packages }}"
+    name: trivy
     state: present
   become: true
-  vars:
-    packages:
-      - trivy
