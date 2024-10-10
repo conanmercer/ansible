@@ -2,7 +2,7 @@
   apt:
     name: unzip
     state: present
-  become: yes
+  become: true
 
 - name: Check if AWS CLI is already installed
   command: aws --version
