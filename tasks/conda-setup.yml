@@ -1,0 +1,19 @@
+- name: Create directory for Miniconda
+  file:
+    path: "{{ ansible_env.HOME }}/miniconda3"
+    state: directory
+
+- name: Download Miniconda installer
+  get_url:
+    url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    dest: "{{ ansible_env.HOME }}/miniconda3/miniconda.sh"
+
+- name: Install Miniconda
+  command: bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+  args:
+    creates: "{{ ansible_env.HOME }}/miniconda3/bin/conda"
+
+- name: Remove Miniconda installer
+  file:
+    path: "{{ ansible_env.HOME }}/miniconda3/miniconda.sh"
+    state: absent
