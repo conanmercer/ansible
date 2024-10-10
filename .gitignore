@@ -1,0 +1,20 @@
+# AWS CLI installation files
+/aws/
+
+# AWS CLI configuration and cache
+~/.aws/
+~/.cache/aws/
+~/.config/aws/
+
+# AWS CLI logs
+~/.awscli.log
+
+# AWS CLI executable if placed in a specific folder (adjust path if necessary)
+aws
+
+# AWS CLI installation zip files
+awscliv2.zip
+
+# Additional OS generated files
+.DS_Store
+Thumbs.db
